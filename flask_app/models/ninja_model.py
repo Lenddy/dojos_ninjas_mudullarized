@@ -1,8 +1,6 @@
 from flask_app.config.connectTomysql import connectToMySQL
 from flask_app import db
-
-
-
+from flask import flash
 
 class Ninjas:
     def __init__(self,data):
@@ -13,7 +11,7 @@ class Ninjas:
         self .dojos_id = data["dojos_id"]
 
 
-
+#for adding a ninja
     @classmethod
     def add_ninja(cls,data):
         query  ="insert into ninjas (f_name,l_name,age,dojos_id) values (%(f_name)s,%(l_name)s,%(age)s,%(dojos_id)s);"
@@ -23,3 +21,16 @@ class Ninjas:
 
 
 
+    @staticmethod
+    def flassh_message(ninjas):
+        is_valid = True
+        if len(ninjas["f_name"]) < 3 :
+            flash("First name must be at least 3 characters","first_name_error")
+            is_valid = False
+        if len(ninjas["l_name"])< 3:
+            flash("Last name must be at least 3 characters","last_name_error")
+            is_valid = False
+        if len(ninjas["age"]) < 1 :
+            flash("you must have at least 1 number","age_error")
+            is_valid
+        return is_valid
