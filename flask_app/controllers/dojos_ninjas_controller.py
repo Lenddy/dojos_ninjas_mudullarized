@@ -9,14 +9,11 @@ def show_all():
     dojos = Dojos.get_all()
     return render_template("show_all.html",dojos = dojos)
 
-
-@app.route("/add/dojo")
-def new_dojo():
-    return render_template("index.html")
-
-
+#adds dojo
 @app.route("/add/dojo",methods = ["post"])
 def create_dojo():
+    if not Dojos.validatin_dojos(request.form):
+        return redirect("/")
     Dojos.add_one(request.form)
     return redirect("/")
 
@@ -38,7 +35,7 @@ def show_one_dojo_with_ninjas(num):
 
 @app.route("/show/ninja")
 def show_ninjas():
-    ninja = Dojos.get_ninjas_in_dojo()
+    Dojos.get_ninjas_in_dojo()
     return redirect("one_dojo.html")
 
 
@@ -50,6 +47,8 @@ def new_ninja():
 
 @app.route("/add/ninja", methods = ["post"])
 def add_ninja():
+    if not Ninjas.flassh_message(request.form):
+        return redirect("/add/ninja")
     data = {
         "f_name":request.form["f_name"],
         "l_name": request.form["l_name"],
@@ -58,6 +57,6 @@ def add_ninja():
     }
     Ninjas.add_ninja(data)
     print(data)
-    return redirect("/")
+    return redirect("/show/ninja")
 
 

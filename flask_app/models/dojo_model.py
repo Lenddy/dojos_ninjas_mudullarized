@@ -1,6 +1,7 @@
 from flask_app.config.connectTomysql import connectToMySQL
 from flask_app import db
 from flask_app.models import ninja_model
+from  flask import flash
 
 
 
@@ -18,13 +19,6 @@ class Dojos:
         query = "select * from dojos;"
         result = connectToMySQL(db).query_db(query)
         return result
-
-    @classmethod
-    def get_one(cls,data):
-        query = "select * from dojos where id = %(id)s;"
-        result = connectToMySQL(db).query_db(query,data)
-        
-        return cls(result[0])
 
 
     @classmethod
@@ -49,3 +43,11 @@ class Dojos:
 
             dojo.ninjas.append(ninja_model.Ninjas(ninja_data))
         return dojo
+
+    @staticmethod
+    def validatin_dojos(dojos):
+        validate = True
+        if len(dojos["name"]) < 2:
+            flash("name must be at least 2 characters","dojo_error")
+            validate = False
+        return validate
