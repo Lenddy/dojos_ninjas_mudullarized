@@ -9,8 +9,8 @@
 
 	<body>
 		<h1>All Dojos</h1>
-
 		<div>
+			<!-- displays the /add/dojo form -->
 			<form action="add/dojo" method="post">
 				<div>
 					<h1>
@@ -18,6 +18,7 @@
 					</h1>
 				</div>
 				<div>
+					<!-- validates for user input -->
 					<input type="text" name="name" id="" /> {% for message in
 					get_flashed_messages(category_filter = ["dojo_error"]) %}
 					{{message}} {% endfor %}
@@ -25,11 +26,11 @@
 				<button type="submit">Add dojo</button>
 				<div></div>
 			</form>
+			<!-- take you to the add/ninja page -->
 		</div>
-
 		<div><a href="add/ninja">Add Ninja</a></div>
-
 		<div>
+			<!-- displays all the dojos names -->
 			{%for item in dojos:%}
 			<h1><a href="/show_one/{{item.id}}">{{item.name}}</a></h1>
 			{%endfor%}

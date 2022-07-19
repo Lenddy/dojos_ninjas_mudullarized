@@ -20,7 +20,7 @@ class Ninjas:
         return result
 
 
-
+# validates user input and flashes them if is wrong
     @staticmethod
     def flassh_message(ninjas):
         is_valid = True

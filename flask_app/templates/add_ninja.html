@@ -7,16 +7,18 @@
 		<title>Document</title>
 	</head>
 	<body>
+		<!-- add ninja form -->
 		<form action="/add/ninja" method="post">
 			<div>
+				<!-- gives all the names of the dojos as an option -->
 				<label for="dojo">Dojo</label>
 				<select name="dojos_id" id="dojos_id" vlues="dojos_id">
 					{%for item in all_dojos:%}
 					<option value="{{item.id}}">{{item.name}}</option>
-
 					{%endfor%}
 				</select>
 			</div>
+			<!-- validates for user input -->
 			<div>
 				<label for="first_name">First name</label>
 				<input type="text" name="f_name" id="f_name" />

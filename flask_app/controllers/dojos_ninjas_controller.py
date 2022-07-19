@@ -9,7 +9,7 @@ def show_all():
     dojos = Dojos.get_all()
     return render_template("show_all.html",dojos = dojos)
 
-#adds dojo
+#adds dojo and validates that somethin is inputed
 @app.route("/add/dojo",methods = ["post"])
 def create_dojo():
     if not Dojos.validatin_dojos(request.form):
@@ -21,7 +21,7 @@ def create_dojo():
 '''
 ******************************
 ******************************
-ninjas routes
+________ninjas routes________
 ******************************
 ******************************
 '''
@@ -44,7 +44,7 @@ def new_ninja():
     all_dojos = Dojos.get_all()
     return render_template("add_ninja.html",all_dojos = all_dojos)
 
-
+#add ninjas and validates that something is inputed
 @app.route("/add/ninja", methods = ["post"])
 def add_ninja():
     if not Ninjas.flassh_message(request.form):
