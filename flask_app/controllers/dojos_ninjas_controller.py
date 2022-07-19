@@ -25,6 +25,8 @@ ________ninjas routes________
 ******************************
 ******************************
 '''
+
+# show the ninjas that are in the selectet dojo
 @app.route("/show_one/<int:num>")
 def show_one_dojo_with_ninjas(num):
     data = {"id":num
@@ -32,11 +34,6 @@ def show_one_dojo_with_ninjas(num):
     one_dojo = Dojos.get_ninjas_in_dojo(data)
     return render_template("one_dojo.html",one_dojo = one_dojo)
 
-
-@app.route("/show/ninja")
-def show_ninjas():
-    Dojos.get_ninjas_in_dojo()
-    return redirect("one_dojo.html")
 
 
 @app.route("/add/ninja")
@@ -57,6 +54,4 @@ def add_ninja():
     }
     Ninjas.add_ninja(data)
     print(data)
-    return redirect("/show/ninja")
-
-
+    return redirect(f"/show_one/{data['dojos_id']}")
